@@ -4,8 +4,7 @@ import { pixelize } from "@module/formatter";
 import { ReactElement } from "react";
 
 interface IStyleWrapper extends IMargin, IPadding {
-  flex1?: boolean;
-  flex?: number;
+  flex?: boolean;
   c?: boolean;
   cc?: boolean;
   background?: string;
@@ -51,7 +50,8 @@ export default function Wrapper({
 }
 
 const $Wrapper = styled("div")<any>`
-  ${({ column, c, cc }) => (column || c || cc) && "display: flex;"};
+  ${({ flex, column, c, cc }) =>
+    (flex || column || c || cc) && "display: flex;"};
   ${({ column }) => column && `flex-direction: column;`};
   ${({ c }) => c && "align-items: center;"};
   ${({ cc }) => cc && "justify-content: center;"};
