@@ -1,13 +1,10 @@
+import { SerializedStyles } from "@emotion/react";
 import styled from "@emotion/styled";
 import { IMargin, IPadding } from "@interface/IStyle";
 import { pixelize } from "@module/formatter";
-import { ReactElement } from "react";
 
-interface IStyleWrapper extends IMargin, IPadding {
-  flex1?: boolean;
-  flex?: number;
-  c?: boolean;
-  cc?: boolean;
+interface IButton extends IMargin, IPadding {
+  children?: any;
   background?: string;
   bg?: string;
   width?: string | number;
@@ -16,57 +13,23 @@ interface IStyleWrapper extends IMargin, IPadding {
   height?: string | number;
   maxHeight?: string | number;
   minHeight?: string | number;
-  full?: boolean;
   size?: string | number | [string | number, string | number];
   border?: string;
-  column?: boolean;
-  test?: boolean;
+  color?: string;
   borderRadius?: string | number;
   pointer?: boolean;
   cursor?: string;
   float?: string;
+  activeStyle?: SerializedStyles | string;
   onClick?: (e: MouseEvent | TouchEvent) => void;
   position?: "absolute" | "relative" | "fixed" | string;
-  top?: string | number;
-  left?: string | number;
 }
 
-interface IWrapper extends IStyleWrapper {
-  children?: any;
-  style?: any;
-  key?: any;
+export default function Button({ children, ...props }: IButton) {
+  return <$Button {...props}>{children}</$Button>;
 }
 
-export default function Wrapper({
-  key,
-  children,
-  style,
-  ...props
-}: IWrapper): ReactElement {
-  return (
-    <$Wrapper key={key} style={style} {...props}>
-      {children}
-    </$Wrapper>
-  );
-}
-
-const $Wrapper = styled("div")<any>`
-  ${({ column, c, cc }) => (column || c || cc) && "display: flex;"};
-  ${({ column }) => column && `flex-direction: column;`};
-  ${({ c }) => c && "align-items: center;"};
-  ${({ cc }) => cc && "justify-content: center;"};
-  ${({ background }) => background && `backgroundColor: ${background};`};
-  ${({ width }) => width && `width: ${pixelize(width)};`};
-  ${({ maxWidth }) => maxWidth && `max-width: ${pixelize(maxWidth)};`};
-  ${({ minWidth }) => minWidth && `min-width: ${pixelize(minWidth)};`};
-  ${({ height }) => height && `height: ${pixelize(height)};`};
-  ${({ maxHeight }) => maxHeight && `max-height: ${pixelize(maxHeight)};`};
-  ${({ minHeight }) => minHeight && `min-height: ${pixelize(minHeight)};`};
-  ${({ full }) => full && `width: 100%; height: 100%;`};
-  ${({ size }) =>
-    size && Array.isArray(size)
-      ? `width: ${pixelize(size[0])}; height: ${pixelize(size[1])};`
-      : size && `width: ${pixelize(size)}; height: ${pixelize(size)};`};
+const $Button = styled("button")<any>`
   ${({ m }) => m && `margin: ${pixelize(m)};`};
   ${({ mt }) => mt && `margin-top: ${pixelize(mt)};`};
   ${({ mr }) => mr && `margin-right: ${pixelize(mr)};`};
@@ -85,15 +48,28 @@ const $Wrapper = styled("div")<any>`
     py && `padding-top: ${pixelize(py)}; padding-bottom: ${pixelize(py)};`};
   ${({ px }) =>
     px && `padding-right: ${pixelize(px)}; padding-left: ${pixelize(px)};`};
+  ${({ background }) => background && `backgroundColor: ${background};`};
   ${({ bg }) => bg && `background: ${bg};`};
+  ${({ width }) => width && `width: ${pixelize(width)};`};
+  ${({ maxWidth }) => maxWidth && `max-width: ${pixelize(maxWidth)};`};
+  ${({ minWidth }) => minWidth && `min-width: ${pixelize(minWidth)};`};
+  ${({ height }) => height && `height: ${pixelize(height)};`};
+  ${({ maxHeight }) => maxHeight && `max-height: ${pixelize(maxHeight)};`};
+  ${({ minHeight }) => minHeight && `min-height: ${pixelize(minHeight)};`};
+  ${({ size }) =>
+    size && Array.isArray(size)
+      ? `width: ${pixelize(size[0])}; height: ${pixelize(size[1])};`
+      : size && `width: ${pixelize(size)}; height: ${pixelize(size)};`};
   ${({ border }) => border && `border: ${border};`};
-  ${({ test }) => test && `box-shadow: 0px 0px 2px gray inset;`};
+  ${({ color }) => color && `color: ${color};`};
   ${({ borderRadius }) =>
     borderRadius && `border-radius: ${pixelize(borderRadius)};`};
   ${({ pointer }) => pointer && `cursor: pointer;`};
   ${({ cursor }) => cursor && `cursor: ${cursor};`};
   ${({ float }) => float && `float: ${float};`};
   ${({ position }) => position && `position: ${position};`};
-  ${({ top }) => top && `top: ${pixelize(top)};`};
-  ${({ left }) => left && `left: ${pixelize(left)};`};
+
+  &:active {
+    ${({ activeStyle }) => activeStyle}
+  }
 `;
