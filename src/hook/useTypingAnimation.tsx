@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 import { ReactElement, useState, useEffect, useCallback } from "react";
 
 interface IUseTypingAnimation {
+  /** 문자열 마지막의 밑줄 커서 default: true */
   blankCursor?: boolean;
+  /** 각 텍스트의 입력속도 default: 80 */
   speed?: number;
 }
 
@@ -19,8 +21,6 @@ export default function useTypingAnimation(
       : [true, () => null];
 
   useEffect(() => {
-    console.log("option?.blankCursor", option?.blankCursor);
-
     effectedText.length < stringArr.length
       ? setTimeout(
           () =>

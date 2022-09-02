@@ -9,15 +9,23 @@ import useTypingAnimation from "src/hook/useTypingAnimation";
 
 const Home: NextPage = () => {
   const [smile, setSmile] = useState<boolean>(false);
-  const AnimatedText = useTypingAnimation("click me!");
+  const AnimatedClickMe = useTypingAnimation("click me!");
+  const AnimatedYeonpmStart = useTypingAnimation(
+    smile ? "$ yeonpm start" : "",
+    { speed: 30 }
+  );
 
   return (
     <Wrapper size={["100vw", "100vh"]} cc>
       <Wrapper size={["100%", 353]} maxWidth={600} px={40} mt={130}>
         <Wrapper size={"100%"} maxHeight={223}>
-          <Wrapper flex pointer onClick={() => setSmile((v) => !v)}>
+          <Wrapper flex pointer onClick={() => setSmile(true)}>
             <Paperio smile={smile} />
-            <AnimatedText ml={20} mt={55} size={15} />
+            {smile ? (
+              <AnimatedYeonpmStart ml={20} mt={55} size={15} />
+            ) : (
+              <AnimatedClickMe ml={20} mt={55} size={15} />
+            )}
           </Wrapper>
           <AppleText size={"25px"} weight={500} color={"#202124"} mb={30}>
             사이트에 연결할 수 있음
