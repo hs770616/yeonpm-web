@@ -5,20 +5,19 @@ import { css } from "@emotion/react";
 import Text from "@component/atom/Text";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import useTypingAnimation from "src/hook/useTypingAnimation";
 
 const Home: NextPage = () => {
   const [smile, setSmile] = useState<boolean>(false);
-  const [clickMeVisible, setClickMeVisible] = useState<boolean>(false);
-  useEffect(() => void setTimeout(() => setClickMeVisible(true), 1000), []);
+  const AnimatedText = useTypingAnimation("click me!");
+
   return (
     <Wrapper size={["100vw", "100vh"]} cc>
       <Wrapper size={["100%", 353]} maxWidth={600} px={40} mt={130}>
         <Wrapper size={"100%"} maxHeight={223}>
           <Wrapper flex pointer onClick={() => setSmile((v) => !v)}>
             <Paperio smile={smile} />
-            <Text ml={20} mt={55}>
-              {clickMeVisible && "click me!"}
-            </Text>
+            <AnimatedText ml={20} mt={55} size={15} />
           </Wrapper>
           <AppleText size={"25px"} weight={500} color={"#202124"} mb={30}>
             사이트에 연결할 수 있음
