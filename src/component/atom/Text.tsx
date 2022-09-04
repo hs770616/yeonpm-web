@@ -16,9 +16,9 @@ export default function Text({ children, ...props }: IText) {
 }
 
 const $Text = styled("p")<any>`
-  ${({ size }) => `font-size: ${pixelize(size)};`};
-  ${({ font }) => `font-family: ${font};`};
-  ${({ weight }) => `font-weight: ${weight};`};
+  ${({ size }) => size && `font-size: ${pixelize(size)};`};
+  ${({ font }) => font && `font-family: ${font};`};
+  ${({ weight }) => weight && `font-weight: ${weight};`};
   ${({ m }) => m && `margin: ${pixelize(m)};`};
   ${({ mt }) => mt && `margin-top: ${pixelize(mt)};`};
   ${({ mr }) => mr && `margin-right: ${pixelize(mr)};`};

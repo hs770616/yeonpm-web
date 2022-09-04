@@ -32,6 +32,7 @@ interface IStyleWrapper extends IMargin, IPadding {
 
 interface IWrapper extends IStyleWrapper {
   children?: any;
+  className?: string;
   style?: any;
   key?: any;
 }
@@ -68,6 +69,7 @@ const $Wrapper = styled("div")<any>`
       ? `width: ${pixelize(size[0])}; height: ${pixelize(size[1])};`
       : size && `width: ${pixelize(size)}; height: ${pixelize(size)};`};
   ${({ m }) => m && `margin: ${pixelize(m)};`};
+  ${({ margin }) => margin && `margin: ${pixelize(margin)};`};
   ${({ mt }) => mt && `margin-top: ${pixelize(mt)};`};
   ${({ mr }) => mr && `margin-right: ${pixelize(mr)};`};
   ${({ mb }) => mb && `margin-bottom: ${pixelize(mb)};`};
@@ -77,6 +79,7 @@ const $Wrapper = styled("div")<any>`
   ${({ mx }) =>
     mx && `margin-right: ${pixelize(mx)}; margin-left: ${pixelize(mx)};`};
   ${({ p }) => p && `padding: ${pixelize(p)};`};
+  ${({ padding }) => padding && `padding: ${pixelize(padding)};`};
   ${({ pt }) => pt && `padding-top: ${pixelize(pt)};`};
   ${({ pr }) => pr && `padding-right: ${pixelize(pr)};`};
   ${({ pb }) => pb && `padding-bottom: ${pixelize(pb)};`};

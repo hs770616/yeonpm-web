@@ -1,4 +1,5 @@
 export interface IMargin {
+  margin?: string | number;
   mt?: string | number;
   mr?: string | number;
   mb?: string | number;
@@ -9,6 +10,7 @@ export interface IMargin {
 }
 
 export interface IPadding {
+  padding?: string | number;
   pt?: string | number;
   pr?: string | number;
   pb?: string | number;
