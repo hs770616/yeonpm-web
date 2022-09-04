@@ -49,10 +49,16 @@ export default function Splash({
               <AnimatedClickMe ml={20} mt={55} size={15} />
             )}
           </Wrapper>
-          <AppleText size={"25px"} weight={500} color={"#202124"} mb={30}>
+          <AppleText
+            size={"25px"}
+            weight={500}
+            color={"#202124"}
+            mb={30}
+            mt={10}
+          >
             사이트에 연결할 수 있음
           </AppleText>
-          <AppleText size={"15px"} weight={400} color={"#5F6368"}>
+          <AppleText size={"15px"} weight={400} color={"#5F6368"} mb={30}>
             yeonpm.com에 오신걸 환영합니다.
           </AppleText>
           <AppleText size={"13.5px"} weight={400} color={"#5F6368"}>
