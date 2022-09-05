@@ -31,6 +31,10 @@ export default function Splash({
     disableSplash && router.push("/?tab=[index]", undefined, { shallow: true });
   }, [disableSplash]);
 
+  useEffect(() => {
+    isSplash && setDisableSplash(false);
+  }, [router.asPath]);
+
   return !disableSplash && isSplash ? (
     <Wrapper size={["100vw", "100vh"]} cc position="fixed" bg="white">
       <Wrapper size={["100%", 353]} maxWidth={600} px={40} mt={130}>
