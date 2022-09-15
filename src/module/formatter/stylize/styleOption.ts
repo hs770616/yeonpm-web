@@ -46,23 +46,35 @@ const paddingOption: any = {
 
 export interface ISize {
   width?: TextType;
+  maxWidth?: TextType;
+  minWidth?: TextType;
   height?: TextType;
+  maxHeight?: TextType;
+  minHeight?: TextType;
+  full?: boolean;
   size?: [TextType, TextType] | TextType;
 }
 
 const sizeOption: any = {
   width: 'width:',
-  height: 'height:'
+  maxWidth: 'max-width:',
+  minWidth: 'min-width:',
+  height: 'height:',
+  maxHeight: 'max-height:',
+  minHeight: 'min-height:',
+  full: 'width:100%;height:100%'
 };
 
-export interface IBackground {
+export interface IColor {
   bg?: string;
   background?: string;
+  color?: string;
 }
 
-const backgroundOption: any = {
+const colorOption: any = {
   bg: 'background:',
-  background: 'background:'
+  background: 'background:',
+  color: 'color:'
 };
 
 export interface IAlign {
@@ -71,6 +83,11 @@ export interface IAlign {
   cc?: boolean;
   column?: boolean;
   position?: 'absolute' | 'relative' | 'fixed';
+  float?: string;
+  top?: TextType;
+  left?: TextType;
+  right?: TextType;
+  bottom?: TextType;
 }
 
 const alignOption: any = {
@@ -78,15 +95,46 @@ const alignOption: any = {
   c: 'justify-content:center',
   cc: 'align-items:center',
   column: 'flex-direction:column',
-  position: 'position:'
+  position: 'position:',
+  float: 'float:',
+  top: 'top:',
+  left: 'left:',
+  right: 'right:',
+  bottom: 'bottom:'
 };
 
-export interface IStyle extends IMargin, IPadding, ISize, IBackground, IAlign {}
+export interface ICursor {
+  cursor?: string;
+  pointer?: boolean;
+  notAllowed?: boolean;
+  progress?: boolean;
+}
+
+const cursorOption: any = {
+  cursor: 'cursor:',
+  pointer: 'cursor:pointer',
+  notAllowed: 'cursor:not-allowed',
+  progress: 'cursor:progress'
+};
+
+export interface IBorder {
+  border?: string;
+  borderRadius?: TextType;
+}
+
+const borderOption: any = {
+  border: 'border:',
+  borderRadius: 'border-radius:'
+};
+
+export interface IStyle extends IMargin, IPadding, ISize, IColor, IAlign, ICursor, IBorder {}
 
 export default {
   ...marginOption,
   ...paddingOption,
   ...sizeOption,
-  ...backgroundOption,
-  ...alignOption
+  ...colorOption,
+  ...alignOption,
+  ...cursorOption,
+  ...borderOption
 };

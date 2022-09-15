@@ -38,17 +38,5 @@ export default function Wrapper({key, children, style, ...props}: IWrapper): Rea
 
 const $Wrapper = styled('div')<any>`
   ${(props) => stylize(props)}
-  ${({maxWidth}) => maxWidth && `max-width: ${pixelize(maxWidth)};`};
-  ${({minWidth}) => minWidth && `min-width: ${pixelize(minWidth)};`};
-  ${({maxHeight}) => maxHeight && `max-height: ${pixelize(maxHeight)};`};
-  ${({minHeight}) => minHeight && `min-height: ${pixelize(minHeight)};`};
-  ${({full}) => full && `width: 100%; height: 100%;`};
-  ${({border}) => border && `border: ${border};`};
   ${({test}) => test && `box-shadow: 0px 0px 2px gray inset;`};
-  ${({borderRadius}) => borderRadius && `border-radius: ${pixelize(borderRadius)};`};
-  ${({pointer}) => pointer && `cursor: pointer;`};
-  ${({cursor}) => cursor && `cursor: ${cursor};`};
-  ${({float}) => float && `float: ${float};`};
-  ${({top}) => top && `top: ${pixelize(top)};`};
-  ${({left}) => left && `left: ${pixelize(left)};`};
 `;

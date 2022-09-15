@@ -58,7 +58,7 @@ export default function Splash({isRenderMain, setIsRenderMain}: {isRenderMain: b
             float="right"
             m="0 0 0 auto"
             pointer
-            onClick={(e) => router.push('/')}
+            onClick={() => router.reload()}
             activeStyle={css`
               background: #1967d2;
             `}
@@ -115,7 +115,7 @@ const Paperio = ({smile}: {smile: boolean}) => (
     )}
   </Wrapper>
 );
-const Drawing = (props: any) => <Wrapper className="css-test" bg="#535353" position="absolute" left={props.xy[0]} top={props.xy[1]} width={3} height={3} {...props} />;
+const Drawing = (props: any) => <Wrapper bg="#535353" position="absolute" left={props.xy[0]} top={props.xy[1]} width={3} height={3} {...props} />;
 
 const AppleText = styled(Text)`
   font-family: Apple SD Gothic Neo;

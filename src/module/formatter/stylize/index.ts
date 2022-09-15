@@ -19,12 +19,8 @@ export default function stylize(props: any): string {
     style = `${styleArray.join(';')};`;
   }
 
-  if (!props.className?.includes('css-test')) {
-    // console.log('formattedStyle', formattedStyle);
-    // console.log('simpleProps', simpleProps);
-    // console.log(`%cstyle {\n\n\t%c${style.replace(/;;/g, ';\n\t').replace(/;/g, ';\n\t')}\n%c}`, 'color:skyblue;font-weight:800;', '', 'color:skyblue;font-weight:800;');
-    console.log('style', style);
-    // console.groupEnd();
+  if (props.className?.includes('css-test')) {
+    console.log(`%cstyle {\n\n\t%c${style.replace(/;;/g, ';\n\t').replace(/;/g, ';\n\t')}\n%c}`, 'color:skyblue;font-weight:800;', '', 'color:skyblue;font-weight:800;');
   }
 
   return style;
@@ -36,8 +32,6 @@ export default function stylize(props: any): string {
  * @returns
  */
 function styleFomatter(needFormatProps: any): IStyle {
-  // console.group('_');
-  // console.log('needFormatProps', needFormatProps);
   let style: IStyle = {};
 
   const {flex, column, c, cc, marginX, mx, marginY, my, paddingX, px, paddingY, py, size}: IStyle = needFormatProps;
