@@ -1,85 +1,64 @@
-import Wrapper from "@component/atom/Wrapper";
-import Button from "@component/atom/Button";
-import { css } from "@emotion/react";
-import Text from "@component/atom/Text";
-import styled from "@emotion/styled";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import useTypingAnimation from "src/hook/useTypingAnimation";
-import { useRouter } from "next/router";
+import Wrapper from '@component/atom/Wrapper';
+import Button from '@component/atom/Button';
+import {css} from '@emotion/react';
+import Text from '@component/atom/Text';
+import styled from '@emotion/styled';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import useTypingAnimation from 'src/hook/useTypingAnimation';
+import {useRouter} from 'next/router';
 
-export default function Splash({
-  isRenderMain,
-  setIsRenderMain,
-}: {
-  isRenderMain: boolean;
-  setIsRenderMain: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function Splash({isRenderMain, setIsRenderMain}: {isRenderMain: boolean; setIsRenderMain: Dispatch<SetStateAction<boolean>>}) {
   const router = useRouter();
-  const isSplash = router.pathname === "/" && !router.asPath.includes("tab");
+  const isSplash = router.pathname === '/' && !router.asPath.includes('tab');
   const [disableSplash, setDisableSplash] = useState<boolean>(false);
-  const AnimatedClickMe = useTypingAnimation("click me!");
-  const AnimatedYeonpmStart = useTypingAnimation(
-    isRenderMain ? "$ yeonpm start" : "",
-    { speed: 30 }
-  );
+  const AnimatedClickMe = useTypingAnimation('click me!');
+  const AnimatedYeonpmStart = useTypingAnimation(isRenderMain ? '$ yeonpm start' : '', {speed: 30});
 
   useEffect(() => {
     isRenderMain && setTimeout(() => setDisableSplash(true), 2200);
   }, [isRenderMain]);
 
   useEffect(() => {
-    disableSplash && router.push("/?tab=[index]", undefined, { shallow: true });
+    disableSplash && router.push('/?tab=[index]', undefined, {shallow: true});
   }, [disableSplash]);
 
   useEffect(() => {
-    isSplash && setDisableSplash(false);
+    if (isSplash) {
+      setDisableSplash(false);
+      setIsRenderMain(false);
+    }
   }, [router.asPath]);
 
   return !disableSplash && isSplash ? (
-    <Wrapper size={["100vw", "100vh"]} cc position="fixed" bg="white">
-      <Wrapper size={["100%", 353]} maxWidth={600} px={40} mt={130}>
-        <Wrapper size={"100%"} maxHeight={223}>
+    <Wrapper size={['100vw', '100vh']} c position="fixed" bg="white">
+      <Wrapper size={['100%', 353]} maxWidth={600} px={40} mt={130}>
+        <Wrapper size={'100%'} maxHeight={223}>
           {/* FIXME: parent rerender */}
-          <Wrapper
-            flex
-            pointer
-            onClick={() => setIsRenderMain(true)}
-            width="100%"
-          >
+          <Wrapper flex pointer onClick={() => setIsRenderMain(true)} width="100%">
             <Paperio smile={isRenderMain} />
-            {isRenderMain ? (
-              <AnimatedYeonpmStart ml={20} mt={55} size={15} />
-            ) : (
-              <AnimatedClickMe ml={20} mt={55} size={15} />
-            )}
+            {isRenderMain ? <AnimatedYeonpmStart ml={20} mt={55} fontSize={15} /> : <AnimatedClickMe ml={20} mt={55} fontSize={15} />}
           </Wrapper>
-          <AppleText
-            size={"25px"}
-            weight={500}
-            color={"#202124"}
-            mb={30}
-            mt={10}
-          >
+          <AppleText fontSize={'25px'} weight={500} color={'#202124'} mb={30} mt={10}>
             사이트에 연결할 수 있음
           </AppleText>
-          <AppleText size={"15px"} weight={400} color={"#5F6368"} mb={30}>
+          <AppleText fontSize={'15px'} weight={400} color={'#5F6368'} mb={30}>
             yeonpm.com에 오신걸 환영합니다.
           </AppleText>
-          <AppleText size={"13.5px"} weight={400} color={"#5F6368"}>
+          <AppleText fontSize={'13.5px'} weight={400} color={'#5F6368'}>
             WELCOME_TO_YEONPM_DOT_COM
           </AppleText>
         </Wrapper>
-        <Wrapper size={["100%", 100]} c>
+        <Wrapper size={['100%', 100]} c>
           <Button
             size={[77, 32]}
-            bg={"#1A73E8"}
+            bg={'#1A73E8'}
             color="#fff"
             borderRadius={4}
             border="none"
             float="right"
             m="0 0 0 auto"
             pointer
-            onClick={(e) => router.push("/")}
+            onClick={(e) => router.push('/')}
             activeStyle={css`
               background: #1967d2;
             `}
@@ -94,8 +73,8 @@ export default function Splash({
   );
 }
 
-const Paperio = ({ smile }: { smile: boolean }) => (
-  <Wrapper size={[35, 44]} m={"30px 0 40px"} position="relative">
+const Paperio = ({smile}: {smile: boolean}) => (
+  <Wrapper size={[35, 44]} m={'30px 0 40px'} position="relative">
     {/* 테두리 */}
     <Drawing width={28} xy={[0, 0]} />
     <Drawing height={34} xy={[31, 6]} />
@@ -136,17 +115,7 @@ const Paperio = ({ smile }: { smile: boolean }) => (
     )}
   </Wrapper>
 );
-const Drawing = (props: any) => (
-  <Wrapper
-    bg="#535353"
-    position="absolute"
-    left={props.xy[0]}
-    top={props.xy[1]}
-    width={3}
-    height={3}
-    {...props}
-  />
-);
+const Drawing = (props: any) => <Wrapper className="css-test" bg="#535353" position="absolute" left={props.xy[0]} top={props.xy[1]} width={3} height={3} {...props} />;
 
 const AppleText = styled(Text)`
   font-family: Apple SD Gothic Neo;

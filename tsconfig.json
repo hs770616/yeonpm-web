@@ -14,6 +14,7 @@
     "paths": {
       //path 설정
       "@module/*": ["src/module/*"],
+      "@formatter/*": ["src/module/formatter/*"],
       "@hook/*": ["src/module/hook/*"],
       "@component/*": ["src/component/*"],
       "@atom/*": ["src/component/atom/*"],
