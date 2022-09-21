@@ -1,12 +1,13 @@
 import '../styles/globals.css';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
+import {useRouter} from 'next/router';
 
 function MyApp({Component, pageProps}: AppProps) {
   return (
     <>
       <Head>
-        <title>yeonpm</title>
+        <title>{process.env.NEXT_PUBLIC_BASE_PATH?.startsWith('local') ? `(l) ` : ''}yeonpm</title>
       </Head>
       <Component {...pageProps} />
     </>

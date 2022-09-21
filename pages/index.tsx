@@ -1,12 +1,13 @@
-import type { GetServerSideProps, NextPage } from "next";
-import { useEffect, useState } from "react";
-import Splash from "@component/template/Splash";
-import BaseLayout from "@component/template/BaseLayout";
-import Wrapper from "@component/atom/Wrapper";
+import type {GetServerSideProps, NextPage} from 'next';
+import {useEffect, useState} from 'react';
+import Splash from '@component/template/Splash';
+import Wrapper from '@component/atom/Wrapper';
+import BaseLayout from '@component/template/BaseLayout';
+import {isLocal} from 'src/nowEnv';
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const isRenderMain = context.req.url.includes("tab");
-  return { props: { isRenderMain } };
+  const isRenderMain = context.req.url.includes('tab');
+  return {props: {isRenderMain}};
 };
 
 const Home: NextPage = (props: any) => {
@@ -16,20 +17,11 @@ const Home: NextPage = (props: any) => {
     <>
       <Splash isRenderMain={isRenderMain} setIsRenderMain={setIsRenderMain} />
       <BaseLayout isRenderMain={isRenderMain} />
-      <DevFlag />
+      {isLocal ? <DevFlag /> : <></>}
     </>
   );
 };
 
 export default Home;
 
-const DevFlag = () => (
-  <Wrapper
-    position="absolute"
-    size={10}
-    bg="red"
-    borderRadius={5}
-    mt={10}
-    ml={10}
-  />
-);
+const DevFlag = () => <Wrapper top={'0px'} position="absolute" size={10} bg="red" borderRadius={5} mt={3} ml={3} />;

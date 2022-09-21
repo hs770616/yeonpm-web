@@ -1,8 +1,8 @@
+import {useCallback} from 'react';
 import Wrapper from '@component/atom/Wrapper';
 import styled from '@emotion/styled';
 import {VscFiles, VscSearch, VscExtensions, VscBook, VscSourceControl} from 'react-icons/vsc';
 import {Dispatch, ReactElement, SetStateAction, useEffect, useState} from 'react';
-import {useCallback} from 'react';
 import Text from '@component/atom/Text';
 
 type IconType = {size: number};
@@ -66,7 +66,7 @@ export default function LeftBar() {
   );
 
   return (
-    <$LeftBar size={['auto', '100vh']} flex>
+    <$LeftBar size={['auto', '100%']} flex>
       <ul style={{width: 50, height: '100%', background: '#2D2D2D'}}>
         {LeftElements.map((el) => (
           <LeftElement Icon={el.icon} menuName={el.menuName} checkedMenu={checkedMenu} setCheckedMenu={setCheckedMenu} key={el.menuName} />

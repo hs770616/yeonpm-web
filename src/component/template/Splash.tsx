@@ -1,9 +1,9 @@
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import Wrapper from '@component/atom/Wrapper';
 import Button from '@component/atom/Button';
 import {css} from '@emotion/react';
 import Text from '@component/atom/Text';
 import styled from '@emotion/styled';
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import useTypingAnimation from 'src/hook/useTypingAnimation';
 import {useRouter} from 'next/router';
 
@@ -115,6 +115,7 @@ const Paperio = ({smile}: {smile: boolean}) => (
     )}
   </Wrapper>
 );
+
 const Drawing = (props: any) => <Wrapper bg="#535353" position="absolute" left={props.xy[0]} top={props.xy[1]} width={3} height={3} {...props} />;
 
 const AppleText = styled(Text)`
