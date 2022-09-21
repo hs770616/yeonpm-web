@@ -1,24 +1,11 @@
-import styled from '@emotion/styled';
-import {pixelize} from '@module/formatter/pixelize';
-import stylize from '@module/formatter/stylize';
-import {IStyle} from '@module/formatter/stylize/styleOption';
 import {ReactElement} from 'react';
+import styled from '@emotion/styled';
+import styler from '@module/formatter/styler';
+import {IStyler} from '@module/formatter/styler/IStyler';
 
-interface IStyleWrapper extends IStyle {
-  maxWidth?: string | number;
-  minWidth?: string | number;
-  maxHeight?: string | number;
-  minHeight?: string | number;
-  full?: boolean;
-  border?: string;
+interface IStyleWrapper extends IStyler {
   test?: boolean;
-  borderRadius?: string | number;
-  pointer?: boolean;
-  cursor?: string;
-  float?: string;
   onClick?: (e: MouseEvent | TouchEvent) => void;
-  top?: string | number;
-  left?: string | number;
 }
 
 interface IWrapper extends IStyleWrapper {
@@ -37,6 +24,6 @@ export default function Wrapper({key, children, style, ...props}: IWrapper): Rea
 }
 
 const $Wrapper = styled('div')<any>`
-  ${(props) => stylize(props)}
+  ${(props) => styler(props)};
   ${({test}) => test && `box-shadow: 0px 0px 2px gray inset;`};
 `;
