@@ -1,12 +1,12 @@
 import {useCallback} from 'react';
 import Wrapper from '@component/atom/Wrapper';
 import styled from '@emotion/styled';
-import {VscFiles, VscSearch, VscExtensions, VscBook, VscSourceControl} from 'react-icons/vsc';
+import {VscFiles, VscSearch, VscExtensions, VscBook, VscSourceControl, VscCommentDiscussion, VscDebugLineByLine} from 'react-icons/vsc';
 import {Dispatch, ReactElement, SetStateAction, useEffect, useState} from 'react';
 import Text from '@component/atom/Text';
 
 type IconType = {size: number};
-type MenuType = undefined | 'files' | 'search' | 'extensions' | 'sourceControl' | 'book';
+type MenuType = undefined | 'files' | 'search' | 'extensions' | 'sourceControl' | 'book' | 'debugLineByLine' | 'commentDiscussion';
 
 export default function LeftBar() {
   const [checkedMenu, setCheckedMenu] = useState<MenuType>(undefined);
@@ -48,13 +48,13 @@ export default function LeftBar() {
   );
 
   const LeftDetail = useCallback(
-    ({checkedMenu}: {checkedMenu: MenuType}) =>
-      checkedMenu ? (
-        <Wrapper bg="rgb(37, 37, 38)" color="#ccc" minWidth={170}>
+    ({title}: {title?: string}) =>
+      title ? (
+        <Wrapper bg="rgb(37, 37, 38)" color="#ccc" minWidth={170} style={{resize: 'horizontal', overflow: 'auto'}}>
           <Wrapper size={['100%', 35]} px={8}>
             <Wrapper cc size={'100%'} pl={12}>
               <Text weight={400} fontSize={11}>
-                {menuTitle[checkedMenu]}
+                {title}
               </Text>
             </Wrapper>
           </Wrapper>
@@ -72,7 +72,9 @@ export default function LeftBar() {
           <LeftElement Icon={el.icon} menuName={el.menuName} checkedMenu={checkedMenu} setCheckedMenu={setCheckedMenu} key={el.menuName} />
         ))}
       </ul>
-      <LeftDetail checkedMenu={checkedMenu} />
+      {/* TODO: leftTitle 변수로 빼기 */}
+      {/* TODO: content prop 생성*/}
+      <LeftDetail title={LeftElements.filter((el: LeftElementType) => el.menuName === checkedMenu)[0]?.label} />
     </$LeftBar>
   );
 }
@@ -82,12 +84,14 @@ const $LeftBar = styled(Wrapper)``;
 type LeftElementType = {
   icon: ({size}: IconType) => ReactElement;
   menuName: MenuType;
+  label: string;
 };
 const LeftElements: LeftElementType[] = [
-  {icon: VscFiles, menuName: 'files'},
-  {icon: VscSearch, menuName: 'search'},
-  {icon: VscExtensions, menuName: 'extensions'},
-  {icon: VscSourceControl, menuName: 'sourceControl'},
-  {icon: VscBook, menuName: 'book'}
+  {icon: VscFiles, menuName: 'files', label: 'EXPLORER'},
+  {icon: VscSearch, menuName: 'search', label: 'SEARCH'},
+  {icon: VscExtensions, menuName: 'extensions', label: 'APPS'},
+  {icon: VscSourceControl, menuName: 'sourceControl', label: 'GIT HISTORY'},
+  {icon: VscBook, menuName: 'book', label: 'BOOKS'},
+  {icon: VscDebugLineByLine, menuName: 'debugLineByLine', label: 'MUSIC'},
+  {icon: VscCommentDiscussion, menuName: 'commentDiscussion', label: '1:1 INQUIRE'}
 ];
-const menuTitle = {files: 'EXPLORER', search: 'SEARCH', extensions: 'APPS', sourceControl: 'GIT HISTORY', book: 'BOOKS'};

@@ -5,7 +5,7 @@ import Bottom from './Bottom';
 
 export default function BaseLayout({isRenderMain}: {isRenderMain: boolean}) {
   return isRenderMain ? (
-    <Wrapper style={{overflow: 'hidden'}} column height={'100vh'}>
+    <Wrapper column height={'100vh'}>
       <Wrapper width={'100vw'} bg="#1C1C1C" flex style={{flexGrow: 1}}>
         <LeftBar />
         <MainContent />

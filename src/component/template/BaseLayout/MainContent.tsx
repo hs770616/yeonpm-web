@@ -17,7 +17,7 @@ export default function MainContent() {
   );
   const MainContentBody = useCallback(
     () => (
-      <Wrapper p="30px 0 30px 40px" bg="#1C1C1C" width={'100%'} style={{flexGrow: 1}}>
+      <Wrapper p="30px 0 30px 40px" bg="#1C1C1C" style={{flexGrow: 1}}>
         <Text color="#9BD6FE">hello world</Text>
       </Wrapper>
     ),
@@ -26,9 +26,9 @@ export default function MainContent() {
   return (
     <Wrapper
       bg="#212122"
-      size={['100vw', '100%']}
       className="main-content-wrapper"
       column
+      style={{flexGrow: 1}}
       // border="1px solid #3C3C3C"
     >
       <MainContentTab></MainContentTab>
