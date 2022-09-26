@@ -84,4 +84,8 @@ export interface IBoxShadow {
   boxShadow?: string;
 }
 
-export interface IStyler extends IMargin, IPadding, ISize, IColor, IAlign, ICursor, IBorder, IBracket, IBoxShadow {}
+export interface IZIndex {
+  zIndex?: number;
+}
+
+export interface IStyler extends IMargin, IPadding, ISize, IColor, IAlign, ICursor, IBorder, IBracket, IBoxShadow, IZIndex {}

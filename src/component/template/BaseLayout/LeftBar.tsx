@@ -1,9 +1,10 @@
-import {useCallback} from 'react';
+import {useCallback, useRef} from 'react';
 import Wrapper from '@component/atom/Wrapper';
 import styled from '@emotion/styled';
 import {VscFiles, VscSearch, VscExtensions, VscBook, VscSourceControl, VscCommentDiscussion, VscDebugLineByLine} from 'react-icons/vsc';
 import {Dispatch, ReactElement, SetStateAction, useEffect, useState} from 'react';
 import Text from '@component/atom/Text';
+import useResize from 'src/hook/useResize';
 
 type IconType = {size: number};
 type MenuType = undefined | 'files' | 'search' | 'extensions' | 'sourceControl' | 'book' | 'debugLineByLine' | 'commentDiscussion';
@@ -24,9 +25,11 @@ export default function LeftBar() {
       setCheckedMenu: Dispatch<SetStateAction<MenuType>>;
     }) => {
       const [isChecked, setIsChecked] = useState<boolean>(false);
+
       useEffect(() => {
         checkedMenu === menuName ? setIsChecked(true) : setIsChecked(false);
       }, [checkedMenu]);
+
       return (
         <li style={{display: 'flex', justifyContent: 'center'}}>
           <Wrapper
@@ -47,23 +50,26 @@ export default function LeftBar() {
     []
   );
 
-  const LeftDetail = useCallback(
-    ({title}: {title?: string}) =>
-      title ? (
-        <Wrapper bg="rgb(37, 37, 38)" color="#ccc" minWidth={170} style={{resize: 'horizontal', overflow: 'auto'}}>
-          <Wrapper size={['100%', 35]} px={8}>
-            <Wrapper cc size={'100%'} pl={12}>
-              <Text weight={400} fontSize={11}>
-                {title}
-              </Text>
+  const LeftDetail = useCallback(({title}: {title?: string}) => {
+    const resize = useResize({borderSide: 'right', initialPosition: 220});
+    return title ? (
+      <Wrapper flex>
+        <Wrapper bg="rgb(37, 37, 38)" color="#ccc" width={resize.position - 50} minWidth={170} style={{overflow: 'auto'}}>
+          <resize.Boundary>
+            <Wrapper size={['100%', 35]} px={8}>
+              <Wrapper cc size={'100%'} pl={12}>
+                <Text weight={400} fontSize={11}>
+                  {title}
+                </Text>
+              </Wrapper>
             </Wrapper>
-          </Wrapper>
+          </resize.Boundary>
         </Wrapper>
-      ) : (
-        <></>
-      ),
-    []
-  );
+      </Wrapper>
+    ) : (
+      <></>
+    );
+  }, []);
 
   return (
     <$LeftBar size={['auto', '100%']} flex>

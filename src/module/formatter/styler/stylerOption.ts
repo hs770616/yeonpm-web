@@ -73,6 +73,10 @@ const shadowOption: any = {
   boxShadow: 'box-shadow:'
 };
 
+const zIndexOption: any = {
+  zIndex: 'z-index:'
+};
+
 export default {
   ...marginOption,
   ...paddingOption,
@@ -82,5 +86,6 @@ export default {
   ...cursorOption,
   ...borderOption,
   ...statusOption,
-  ...shadowOption
+  ...shadowOption,
+  ...zIndexOption
 };
