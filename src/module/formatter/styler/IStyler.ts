@@ -49,12 +49,16 @@ export interface IAlign {
   cc?: boolean;
   column?: boolean;
   position?: 'absolute' | 'relative' | 'fixed';
+  absolute?: boolean;
+  relative?: boolean;
+  fixed?: boolean;
   float?: string;
   top?: TextType;
   left?: TextType;
   right?: TextType;
   bottom?: TextType;
   spaceBetween?: boolean;
+  transform?: string;
 }
 
 export interface ICursor {

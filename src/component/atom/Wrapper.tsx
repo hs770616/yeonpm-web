@@ -12,6 +12,8 @@ interface IUserEvent {
   onMouseDown?: (e: MouseEvent) => void;
   onMouseUp?: (e: MouseEvent) => void;
   onMouseMove?: (e: MouseEvent) => void;
+  onMouseOver?: (e: MouseEvent) => void;
+  onMouseEnter?: (e: MouseEvent) => void;
 }
 interface IWrapper extends IStyleWrapper, IUserEvent {
   children?: any;
@@ -21,7 +23,7 @@ interface IWrapper extends IStyleWrapper, IUserEvent {
   key?: any;
 }
 
-function Wrapper({key, children, style, id, ...props}: IWrapper, ref?: Ref<HTMLDivElement>): ReactElement {
+function Wrapper({key, children, style, id, ...props}: IWrapper, ref?: Ref<HTMLDivElement | undefined>): ReactElement {
   return (
     <$Wrapper key={key} id={id} style={style} ref={ref} {...props}>
       {children}

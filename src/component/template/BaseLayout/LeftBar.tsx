@@ -53,19 +53,17 @@ export default function LeftBar() {
   const LeftDetail = useCallback(({title}: {title?: string}) => {
     const resize = useResize({borderSide: 'right', initialPosition: 220});
     return title ? (
-      <Wrapper flex>
-        <Wrapper bg="rgb(37, 37, 38)" color="#ccc" width={resize.position - 50} minWidth={170} style={{overflow: 'auto'}}>
-          <resize.Boundary>
-            <Wrapper size={['100%', 35]} px={8}>
-              <Wrapper cc size={'100%'} pl={12}>
-                <Text weight={400} fontSize={11}>
-                  {title}
-                </Text>
-              </Wrapper>
+      <resize.Boundary minWidth={170}>
+        <Wrapper bg="rgb(37, 37, 38)" color="#ccc" size={'100%'} style={{overflow: 'auto'}}>
+          <Wrapper size={['100%', 35]} px={8}>
+            <Wrapper cc size={'100%'} pl={12}>
+              <Text weight={400} fontSize={11}>
+                {title}
+              </Text>
             </Wrapper>
-          </resize.Boundary>
+          </Wrapper>
         </Wrapper>
-      </Wrapper>
+      </resize.Boundary>
     ) : (
       <></>
     );

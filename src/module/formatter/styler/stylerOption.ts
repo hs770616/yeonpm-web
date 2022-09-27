@@ -38,12 +38,16 @@ const alignOption: any = {
   cc: 'align-items:center',
   column: 'flex-direction:column',
   position: 'position:',
+  absolute: 'position:absolute',
+  relative: 'position:relative',
+  fixed: 'position:fixed',
   float: 'float:',
   top: 'top:',
   left: 'left:',
   right: 'right:',
   bottom: 'bottom:',
-  spaceBetween: 'justify-content:space-between'
+  spaceBetween: 'justify-content:space-between',
+  transform: 'transform:'
 };
 
 const cursorOption: any = {
