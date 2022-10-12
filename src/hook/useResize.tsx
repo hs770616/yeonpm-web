@@ -7,16 +7,15 @@ type UseResizeType = {
 };
 
 type UseResizePropsType = {
-  borderSide: 'left' | 'right' | 'top' | 'bottom';
-  initialPosition: number;
+  boundaryPosition: 'left' | 'right' | 'top' | 'bottom';
   boundaryWidth?: number;
 };
 
 type MousePositionType = {isMoving: boolean; point: number; boundaryPosition: number};
 
-export default function useResize({borderSide, initialPosition, boundaryWidth}: UseResizePropsType): UseResizeType {
-  const [mousePosition, setMousePosition] = useState<MousePositionType>({isMoving: false, point: initialPosition, boundaryPosition: 0});
-  const isHorizonDirection = borderSide === 'left' || borderSide === 'right';
+export default function useResize({boundaryPosition, boundaryWidth}: UseResizePropsType): UseResizeType {
+  const [mousePosition, setMousePosition] = useState<MousePositionType>({isMoving: false, point: 0, boundaryPosition: 0});
+  const isHorizonDirection = boundaryPosition === 'left' || boundaryPosition === 'right';
   const BoundaryRef = useRef<HTMLDivElement>(null);
   // const [boundaryPosition, setBoundaryPosition] = useState<number>(0);
 
@@ -24,17 +23,20 @@ export default function useResize({borderSide, initialPosition, boundaryWidth}: 
     (e: MouseEvent) => {
       const child = BoundaryRef.current?.children[0];
       const rectPosition: DOMRect | undefined = child?.getBoundingClientRect();
-      const {top, right, bottom, left} = {top: rectPosition?.top, right: rectPosition?.right, bottom: rectPosition?.bottom, left: rectPosition?.left};
+      const {top, right, bottom, left} = {top: rectPosition?.top || 0, right: rectPosition?.right || 0, bottom: rectPosition?.bottom || 0, left: rectPosition?.left || 0};
 
-      mousePosition.isMoving && setMousePosition((mousePosition) => ({...mousePosition, point: isHorizonDirection ? e.clientX : e.clientY, boundaryPosition: right || 0}));
+      console.log('right', right);
+      mousePosition.isMoving && setMousePosition((mousePosition) => ({...mousePosition, point: isHorizonDirection ? right : top, boundaryPosition: right || 0}));
 
       // setBoundaryPosition(right || 0);
     },
-    [mousePosition]
+    [BoundaryRef, mousePosition]
   );
+
   const mouseDownHandler = useCallback(() => {
     setMousePosition((mousePosition) => ({...mousePosition, isMoving: true}));
   }, [mousePosition]);
+
   const mouseUpHandler = useCallback(() => {
     setMousePosition((mousePosition) => ({...mousePosition, isMoving: false}));
   }, [mousePosition]);
@@ -44,7 +46,7 @@ export default function useResize({borderSide, initialPosition, boundaryWidth}: 
       return (
         <>
           {/* <Wrapper absolute left={mousePosition.boundaryPosition} size={isHorizonDirection ? [boundaryWidth ?? 4, '100%'] : ['100%', boundaryWidth ?? 4]} bg="blue" /> */}
-          <Wrapper ref={BoundaryRef} width={mousePosition.point - 50} {...props}>
+          <Wrapper ref={BoundaryRef} width={mousePosition.point} {...props}>
             <Wrapper flex size="100%">
               {children}
               <Wrapper
