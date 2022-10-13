@@ -51,7 +51,7 @@ export default function LeftBar() {
   );
 
   const LeftDetail = useCallback(({title}: {title?: string}) => {
-    const resize = useResize({borderSide: 'right', initialPosition: 220});
+    const resize = useResize({boundaryPosition: 'right'});
     return title ? (
       <resize.Boundary minWidth={170}>
         <Wrapper bg="rgb(37, 37, 38)" color="#ccc" size={'100%'} style={{overflow: 'auto'}}>
